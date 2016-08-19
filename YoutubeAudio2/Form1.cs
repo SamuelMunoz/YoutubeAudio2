@@ -20,7 +20,9 @@ namespace YoutubeAudio2
         }
 
         private void btnDescargar_Click(object sender, EventArgs e)
-        {           
+        {
+            btnDescargar.Enabled = false;
+            btnDescargar.Text = @"Descargando...";          
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             var videos = DownloadUrlResolver.GetDownloadUrls(txtDireccion.Text);
@@ -57,8 +59,9 @@ namespace YoutubeAudio2
                 {
                     txtDireccion.Text = "";
                     progressBar.Value = 0;
-                    // ReSharper disable once LocalizableElement
-                    lblPercentage.Text = "0.00%";
+                    lblPercentage.Text = @"0.00%";
+                    btnDescargar.Enabled = true;
+                    btnDescargar.Text = @"Descargar!";
                 }));
             }) {IsBackground = true};
             trd.SetApartmentState(ApartmentState.STA);
